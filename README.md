@@ -1,3 +1,7 @@
+<p>
+  <img src="/img/crono.png" alt="logo" width="250px">
+</p>
+
 *Projeto para Desenvolvimento de Sistema de biblioteca*
 
 *1. Escopo do Projeto*
