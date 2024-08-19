@@ -1,7 +1,5 @@
 
-<p>
-  <img src="/img/crono.png" alt="logo" width="1000px">
-</p>
+
 
 *Projeto para Desenvolvimento de Sistema de biblioteca*
 
@@ -45,7 +43,11 @@ Atividades: Desenvolvimento das funcionalidades de solicitação de empréstimos
 *Documentação e Entrega*:
 Duração: 2 semanas
 Atividades: Elaboração da documentação técnica, criação de manuais de usuário e administrador, testes finais, e entrega do sistema.
-
+<br>
+<br>
+<p>
+  <img src="/img/crono.png" alt="logo" width="1000px">
+</p>
 ================================================================	
 
 *4. Recursos Tecnológicos*
