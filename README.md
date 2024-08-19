@@ -25,23 +25,33 @@ Implementar um sistema de autenticação que permita o registro e login de admin
 *3. Cronograma de Implementação*
 
 *Análise de Requisitos e Modelagem:*
+<br>
 Duração: 1 dia
+<br>
 Atividades: Reunião com stakeholders, definição de requisitos funcionais e não funcionais, criação de diagramas de classe, uso e fluxo, e modelagem do banco de dados.
 
 *Implementação do CRUD para Livros:*
+<br>
 Duração:  1 dia
+<br>
 Atividades: Desenvolvimento das funcionalidades de criação, leitura, atualização e exclusão de livros, incluindo a interface de gerenciamento de catálogo.
 
 *Implementação do CRUD para Usuários:*
+<br>
 Duração: 2 semanas
+<br>
 Atividades: Desenvolvimento das funcionalidades de gerenciamento de usuários, incluindo registro, edição de perfil e remoção de usuários.
 
 *Implementação do Sistema de Empréstimo e Devolução:*
+<br>
 Duração: 4 semanas
+<br>
 Atividades: Desenvolvimento das funcionalidades de solicitação de empréstimos, registro de devoluções e controle de disponibilidade de livros.
 
 *Documentação e Entrega*:
+<br>
 Duração: 2 semanas
+<br>
 Atividades: Elaboração da documentação técnica, criação de manuais de usuário e administrador, testes finais, e entrega do sistema.
 <br>
 <br>
