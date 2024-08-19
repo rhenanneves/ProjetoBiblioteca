@@ -1,10 +1,7 @@
-<<<<<<< HEAD
+
 <p>
   <img src="/img/crono.png" alt="logo" width="250px">
 </p>
-=======
-
->>>>>>> f1fd91b42115e9b5919ad19681644c67c1e7f858
 
 *Projeto para Desenvolvimento de Sistema de biblioteca*
 
