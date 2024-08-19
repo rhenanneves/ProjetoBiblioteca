@@ -1,6 +1,6 @@
 
 <p>
-  <img src="/img/crono.png" alt="logo" width="250px">
+  <img src="/img/crono.png" alt="logo" width="1000px">
 </p>
 
 *Projeto para Desenvolvimento de Sistema de biblioteca*
