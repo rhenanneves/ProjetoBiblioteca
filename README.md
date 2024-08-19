@@ -96,6 +96,11 @@ Ilustrará como administradores e usuários interagem com o sistema, desde o log
 
 *Diagrama de Fluxo:*
 Descreverá o fluxo de operações principais no sistema, como o registro/login, gerenciamento de livros, processo de empréstimo e devolução, e logout.
+<br>
+<br>
+<p>
+  <img src="/img/fluxograma.png" alt="logo" width="1000px">
+</p>
 
 ================================================================
 
