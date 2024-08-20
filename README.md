@@ -93,7 +93,7 @@ Mostrará as relações entre as classes principais do sistema, como Livros, Usu
 <br>
 <br>
 <p>
-  <img src="/img/diagramadeclasse.jpg" alt="logo" width="1000px">
+  <img src="/img/DIAGRAMADECLASSE.jpg" alt="logo" width="1000px">
 </p>
 
 *Diagrama de Uso:*
