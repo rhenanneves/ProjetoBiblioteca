@@ -4,26 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        // Lógica para listar usuários
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        $this->authorize('create', Usuario::class);
+        // Verificação manual de permissão
+        if (Auth::user()->role !== 'bibliotecario') {
+            abort(403, 'Você não tem permissão para criar um usuário.');
+        }
+
         return view('usuarios.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $this->authorize('create', Usuario::class);
+        // Verificação manual de permissão
+        if (Auth::user()->role !== 'bibliotecario') {
+            abort(403, 'Você não tem permissão para criar um usuário.');
+        }
 
+        // Validação dos dados
         $request->validate([
             'nome' => 'required',
             'email' => 'required|email|unique:usuarios',
             'role' => 'required|in:usuario,bibliotecario',
         ]);
 
+        // Criação do usuário
         Usuario::create($request->all());
+
         return redirect()->route('usuarios.index');
     }
 

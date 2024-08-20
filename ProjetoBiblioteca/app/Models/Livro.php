@@ -15,11 +15,11 @@ class Livro extends Model
         'titulo',
         'autor',
         'genero',
-        'disponivel',
+        'disponibilidade',
     ];
 
     protected $casts = [
-        'disponivel' => 'boolean',
+        'disponibilidade' => 'boolean',
     ];
 
     public function emprestimos()

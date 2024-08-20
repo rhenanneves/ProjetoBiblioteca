@@ -90,9 +90,19 @@ Planejamento cuidadoso do fluxo de estados dos empréstimos (solicitado, emprest
 
 *Diagrama de Classe:*
 Mostrará as relações entre as classes principais do sistema, como Livros, Usuários, e Empréstimos, incluindo atributos e métodos.
+<br>
+<br>
+<p>
+  <img src="/img/diagramadeclasse.png" alt="logo" width="1000px">
+</p>
 
 *Diagrama de Uso:*
 Ilustrará como administradores e usuários interagem com o sistema, desde o login até o gerenciamento de livros e empréstimos.
+<br>
+<br>
+<p>
+  <img src="/img/diagramadeuso.png" alt="logo" width="1000px">
+</p>
 
 *Diagrama de Fluxo:*
 Descreverá o fluxo de operações principais no sistema, como o registro/login, gerenciamento de livros, processo de empréstimo e devolução, e logout.
