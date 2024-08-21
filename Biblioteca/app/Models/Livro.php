@@ -9,11 +9,18 @@ class Livro extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['titulo', 'autor', 'genero', 'disponibilidade'];
-    
-    public function emprestimos()
-{
-    return $this->hasMany(Emprestimo::class);
-}
+    protected $fillable = [
+        'titulo',
+        'autor',
+        'genero',
+        'disponibilidade',
+        'bibliotecario_id', // Adiciona a nova coluna
+    ];
 
+    // Defina a relação se necessário
+    public function bibliotecario()
+    {
+        return $this->belongsTo(User::class, 'bibliotecario_id');
+    }
+    
 }

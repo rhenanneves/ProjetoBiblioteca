@@ -50,5 +50,9 @@ class User extends Authenticatable
 {
     return $this->hasMany(Emprestimo::class);
 }
+public function livros()
+{
+    return $this->hasMany(Livro::class, 'bibliotecario_id');
+}
 
 }

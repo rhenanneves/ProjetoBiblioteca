@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Livro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LivroController extends Controller
 {
@@ -21,14 +22,21 @@ class LivroController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titulo' => 'required',
-            'autor' => 'required',
-            'genero' => 'required',
-            'disponibilidade' => 'required',
+            'titulo' => 'required|string',
+            'autor' => 'required|string',
+            'genero' => 'required|string',
+            'disponibilidade' => 'required|boolean',
         ]);
-
-        Livro::create($request->all());
-        return redirect()->route('livros.index')->with('success', 'Livro adicionado com sucesso.');
+    
+        Livro::create([
+            'titulo' => $request->input('titulo'),
+            'autor' => $request->input('autor'),
+            'genero' => $request->input('genero'),
+            'disponibilidade' => $request->input('disponibilidade'),
+            'bibliotecario_id' => Auth::id()// Atribuindo o ID do bibliotecário
+        ]);
+    
+        return redirect()->route('livros.index');
     }
 
     public function show(Livro $livro)

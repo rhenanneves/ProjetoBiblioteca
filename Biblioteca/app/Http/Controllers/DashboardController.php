@@ -21,8 +21,6 @@ class DashboardController extends Controller
         }
     }
 
-
-    // Método para mostrar o dashboard do bibliotecário
     public function bibliotecario()
     {
         $users = User::all(); // Obtém todos os usuários
@@ -31,5 +29,28 @@ class DashboardController extends Controller
         return view('dashboard.bibliotecario', compact('users', 'loans'));
     }
 
-  
+    public function livroDetalhes($id)
+    {
+        $livro = Livro::find($id);
+
+        if (!$livro) {
+            abort(404, 'Livro não encontrado.');
+        }
+
+        return view('livro-detalhes', ['livro' => $livro]);
+    }
+
+    public function catalogoLivros()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+    
+        $bibliotecarioId = Auth::id();
+    
+        $livros = Livro::where('bibliotecario_id', $bibliotecarioId)->get();
+    
+        return view('livros.catalogo-livros', ['livros' => $livros]);
+    }
+    
 }
