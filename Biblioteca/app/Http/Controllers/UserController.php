@@ -40,4 +40,12 @@ class UserController extends Controller
 
         return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso!');
     }
+    public function index()
+    {
+        // Recupera todos os usuários
+        $usuarios = User::all();
+
+        // Retorna a view com a lista de usuários
+        return view('usuarios.index', compact('usuarios'));
+    }
 }

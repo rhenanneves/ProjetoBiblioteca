@@ -46,4 +46,9 @@ class User extends Authenticatable
             'is_bibliotecario' => 'boolean',
         ];
     }
+    public function emprestimos()
+{
+    return $this->hasMany(Emprestimo::class);
+}
+
 }

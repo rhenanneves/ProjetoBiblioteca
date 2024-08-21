@@ -28,19 +28,20 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+    
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
+    
             if ($user->is_bibliotecario) {
-                return redirect()->intended('bibliotecario-dashboard'); // Roteie para o dashboard do bibliotecário
+                return redirect()->intended('bibliotecario-admin'); // Roteie para a página de administração do bibliotecário
             } else {
                 return redirect()->intended('user-dashboard'); // Roteie para a página do usuário
             }
         }
-
+    
         return Redirect::route('login')->withErrors(['email' => 'Credenciais inválidas.']);
     }
+    
 
     /**
      * Lida com o logout do usuário.
@@ -54,6 +55,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

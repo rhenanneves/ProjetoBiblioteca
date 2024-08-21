@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LivroController;
 
+// Rota inicial
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,12 +22,17 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 // Rotas para dashboards
-Route::get('bibliotecario-dashboard', function () {
-    return view('bibliotecario-dashboard');
-})->name('bibliotecario-dashboard')->middleware('auth');
-
+// Rota para o dashboard do bibliotecário
+Route::get('bibliotecario-dashboard', [DashboardController::class, 'bibliotecario'])->name('bibliotecario-dashboard')->middleware('auth');
+Route::get('bibliotecario-admin', function () {
+    return view('dashboard.bibliotecario-admin');
+})->name('bibliotecario-admin')->middleware('auth');
 
 
 Route::get('/user-dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
+// Rotas para o CRUD de usuários
+Route::resource('usuarios', UserController::class)->middleware('auth');
 
+// Rotas para o CRUD de livros
+Route::resource('livros', LivroController::class)->middleware('auth');
