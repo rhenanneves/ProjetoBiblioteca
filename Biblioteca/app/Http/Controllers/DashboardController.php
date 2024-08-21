@@ -12,9 +12,9 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         if ($user->is_bibliotecario) {
-            return view('dashboard.bibliotecario'); // Certifique-se de que esse arquivo existe
+            return view('dashboard.bibliotecario');
         } else {
-            return view('dashboard.usuario'); // Certifique-se de que esse arquivo existe
+            return view('dashboard.usuario'); // Certifique-se de que o nome da view está correto
         }
     }
 }

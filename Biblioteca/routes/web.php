@@ -28,3 +28,4 @@ Route::get('bibliotecario-dashboard', function () {
 
 Route::get('/user-dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
+
