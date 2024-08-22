@@ -23,4 +23,7 @@ class Livro extends Model
         return $this->belongsTo(User::class, 'bibliotecario_id');
     }
     
+    public function emprestimo(){
+        return $this->hasMany(Emprestimo::class); // Adiciona a nova relação
+    }
 }

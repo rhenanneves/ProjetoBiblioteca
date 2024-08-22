@@ -10,7 +10,7 @@ class Emprestimo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'usuario_id',
+        'user_id',
         'livro_id',
         'data_emprego',
         'data_devolucao',

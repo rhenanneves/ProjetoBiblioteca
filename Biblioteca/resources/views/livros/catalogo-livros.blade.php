@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,6 +40,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
@@ -51,23 +53,26 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('catalogo-livros') }}">Catálogo de Livros</a>
+                        <a class="nav-link" href="/catalogo-livros">Livros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('livros.index') }}">Gerenciar Livros</a>
+                        <a class="nav-link" href="/sobre">Sobre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('usuarios.index') }}">Gerenciar Usuários</a>
+                        <a class="nav-link" href="/contato">Contato</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ Auth::user()->is_bibliotecario ? route('bibliotecario-admin') : route('usuario') }}">
                             Olá, {{ Auth::user()->name }}
                         </a>
+
+
                     </li>
+
                     <li class="nav-item">
                         <form action="{{ url('/logout') }}" method="POST" style="display: inline;">
                             @csrf
@@ -82,19 +87,53 @@
     <!-- Conteúdo Principal -->
     <div class="container page-content mt-5">
         <h2>Catálogo de Livros</h2>
+        <!-- Conteúdo Principal -->
+        <div class="container page-content mt-5">
+            <h2>Catálogo de Livros</h2>
+
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+
+            @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+
+            @forelse($livros as $livro)
+            <!-- Conteúdo do loop -->
+            @empty
+            <!-- Conteúdo vazio -->
+            @endforelse
+        </div>
 
         @forelse($livros as $livro)
-            <div class="book-card">
-                <h5 class="book-title">{{ $livro->titulo }}</h5>
-                <p class="book-author">Autor: {{ $livro->autor }}</p>
-                <p>Gênero: {{ $livro->genero }}</p>
-                <p>Status: {{ $livro->disponibilidade ? 'Disponível' : 'Indisponível' }}</p>
-            </div>
+        <div class="book-card">
+            <h5 class="book-title">{{ $livro->titulo }}</h5>
+            <p class="book-author">Autor: {{ $livro->autor }}</p>
+            <p>Gênero: {{ $livro->genero }}</p>
+            <p>Status: {{ $livro->disponibilidade ? 'Disponível' : 'Indisponível' }}</p>
+
+            <!-- Botão de Alugar -->
+            @if($livro->disponibilidade)
+            <form action="{{ route('emprestimo.emprestimo', $livro->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary">Alugar</button>
+            </form>
+
+            @else
+            <button type="button" class="btn btn-secondary" disabled>Indisponível</button>
+            @endif
+        </div>
         @empty
-            <p>Não há livros cadastrados.</p>
+        <p>Não há livros cadastrados.</p>
         @endforelse
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

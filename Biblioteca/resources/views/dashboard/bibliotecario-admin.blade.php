@@ -39,7 +39,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/livros">Livros</a>
+                        <a class="nav-link" href="/catalogo-livros">Livros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/sobre">Sobre</a>
@@ -69,7 +69,8 @@
     <div class="container page-content mt-5">
         <h2>Administração do Bibliotecário</h2>
         <a href="{{ route('livros.index') }}" class="btn btn-primary admin-button">Gerenciar Livros</a>
-    </div>
+        <a href="{{ route('bibliotecario') }}" class="btn btn-secondary admin-button">Gerenciar Usuários</a>
+        </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

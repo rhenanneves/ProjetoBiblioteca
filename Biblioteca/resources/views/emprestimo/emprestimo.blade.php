@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Livro</title>
+    <title>Empréstimo de Livro</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -18,6 +18,28 @@
         .page-content {
             font-family: 'Roboto', sans-serif;
             padding: 20px;
+        }
+
+        .book-details {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-title {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .book-author {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .confirm-button {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -44,7 +66,7 @@
                         <a class="nav-link" href="/contato">Contato</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             Olá, {{ Auth::user()->name }}
@@ -63,32 +85,20 @@
 
     <!-- Conteúdo Principal -->
     <div class="container page-content mt-5">
-        <h2>Editar Livro</h2>
-        <form action="{{ route('livros.update', $livro->id) }}" method="POST">
+        <h2>Empréstimo de Livro</h2>
+
+        <div class="book-details">
+            <h5 class="book-title">{{ $livro->titulo }}</h5>
+            <p class="book-author">Autor: {{ $livro->autor }}</p>
+            <p>Gênero: {{ $livro->genero }}</p>
+            <p>Status: {{ $livro->disponibilidade ? 'Disponível' : 'Indisponível' }}</p>
+        </div>
+
+        <!-- Botão para Confirmar Empréstimo -->
+        <form action="{{ route('emprestimos.confirmar', $livro->id) }}" method="POST" class="confirm-button">
             @csrf
-            @method('PUT')
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Título</label>
-                <input type="text" class="form-control" id="titulo" name="titulo" value="{{ $livro->titulo }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="autor" class="form-label">Autor</label>
-                <input type="text" class="form-control" id="autor" name="autor" value="{{ $livro->autor }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="genero" class="form-label">Gênero</label>
-                <input type="text" class="form-control" id="genero" name="genero" value="{{ $livro->genero }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="disponibilidade" class="form-label">Disponibilidade</label>
-                <select id="disponibilidade" name="disponibilidade" class="form-select" required>
-                    <option value="" disabled selected>Selecione a disponibilidade</option>
-                    <option value="1">Disponível</option>
-                    <option value="0">Indisponível</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-custom">Atualizar</button>
-            <a href="{{ route('livros.index') }}" class="btn btn-secondary">Voltar</a>
+            <button type="submit" class="btn btn-success">Confirmar Empréstimo</button>
+            <a href="{{ route('catalogo-livros') }}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 

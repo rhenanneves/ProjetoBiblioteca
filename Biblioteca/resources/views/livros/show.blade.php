@@ -35,7 +35,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/livros">Livros</a>
+                        <a class="nav-link" href="/catalogo-livros">Livros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/sobre">Sobre</a>

@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/livros">Livros</a>
+                        <a class="nav-link" href="/catalogo-livros">Livros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/sobre">Sobre</a>
@@ -62,16 +62,20 @@
         <p>Bem-vindo ao painel de controle, {{ Auth::user()->name }}!</p>
         <p>Aqui você pode visualizar suas informações e acessar suas reservas.</p>
 
-        <!-- Container Meus Empréstimos -->
+        <!-- Container Meus Livros -->
         <div class="card mt-4">
             <div class="card-header">
-                Meus Empréstimos
+                Meus Livros Alugados
             </div>
-            <div class="card-body">
-                <!-- Conteúdo dos empréstimos aqui -->
-                <p>Você não possui empréstimos no momento.</p>
-                <!-- Substitua o texto acima pelo conteúdo real dos empréstimos -->
-            </div>
+           <h5>Livros Alugados:</h5>
+                    @foreach($loans->where('user_id', $user->id) as $loan)
+                        <div class="book-card">
+                            <h5 class="book-title">{{ $loan->livro->titulo }}</h5>
+                            <p class="book-author">Autor: {{ $loan->livro->autor }}</p>
+                            <p>Data do Empréstimo: {{ $loan->created_at->format('d/m/Y') }}</p>
+                            <p>Data da Devolução: {{ $loan->data_devolucao ? $loan->data_devolucao->format('d/m/Y') : 'Não devolvido' }}</p>
+                        </div>
+                    @endforeach
         </div>
 
         <!-- Container Editar Perfil -->

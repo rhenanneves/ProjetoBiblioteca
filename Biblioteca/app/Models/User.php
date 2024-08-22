@@ -46,10 +46,14 @@ class User extends Authenticatable
             'is_bibliotecario' => 'boolean',
         ];
     }
-    public function emprestimos()
+    // Modelo User
+// Modelo User
+public function emprestimos()
 {
-    return $this->hasMany(Emprestimo::class);
+    return $this->hasMany(Emprestimo::class); // Corrigido para 'user_id'
 }
+
+
 public function livros()
 {
     return $this->hasMany(Livro::class, 'bibliotecario_id');

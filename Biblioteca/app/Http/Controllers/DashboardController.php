@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Emprestimo; // Ajuste o nome conforme necessário
 use App\Models\Livro;
+use Illuminate\Container\Attributes\Database;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -15,11 +17,25 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         if ($user->is_bibliotecario) {
-            return view('dashboard.bibliotecario');
+            return redirect()->route('bibliotecario-admin');
         } else {
             return view('dashboard.usuario'); // Certifique-se de que o nome da view está correto
         }
     }
+
+    public function dashboard()
+    {
+        $user_id = Auth::id();
+        $loans = Emprestimo::with('livro')->get();
+    
+        // Passa os dados para a view
+        return view('dashboard.usuario', compact('user_id', 'loans'));
+    }
+    
+
+
+
+
 
     public function bibliotecario()
     {
@@ -28,6 +44,16 @@ class DashboardController extends Controller
 
         return view('dashboard.bibliotecario', compact('users', 'loans'));
     }
+    public function bibliotecarioAdmin()
+    {
+        // Obtém todos os usuários e empréstimos
+        $users = User::all();
+        $loans = Emprestimo::with('livro')->get();
+
+        // Retorna a view com as variáveis
+        return view('dashboard.bibliotecario-admin', compact('users', 'loans'));
+    }
+
 
     public function livroDetalhes($id)
     {
@@ -42,15 +68,7 @@ class DashboardController extends Controller
 
     public function catalogoLivros()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-    
-        $bibliotecarioId = Auth::id();
-    
-        $livros = Livro::where('bibliotecario_id', $bibliotecarioId)->get();
-    
-        return view('livros.catalogo-livros', ['livros' => $livros]);
+        $livros = Livro::all(); // Isso retorna todos os livros
+        return view('livros.catalogo-livros', compact('livros'));
     }
-    
 }
