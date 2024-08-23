@@ -13,15 +13,16 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public function index()
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
 
-        if ($user->is_bibliotecario) {
-            return redirect()->route('bibliotecario-admin');
-        } else {
-            return view('dashboard.usuario'); // Certifique-se de que o nome da view está correto
-        }
+    if ($user->is_bibliotecario) {
+        return redirect()->route('bibliotecario-admin');
+    } else {
+        $loans = Emprestimo::where('user_id', $user->id)->with('livro')->get();
+        return view('dashboard.usuario', compact('user', 'loans'));
     }
+}
 
     public function dashboard()
     {

@@ -23,20 +23,56 @@
 
         .book-card {
             border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 10px;
+            padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: #fff;
+        }
+
+        .book-image {
+            flex-shrink: 0;
+            width: 120px;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        .book-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .book-details {
+            flex: 1;
         }
 
         .book-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: #333;
+            margin: 0;
         }
 
         .book-author {
             font-size: 1.2rem;
             color: #555;
+        }
+
+        .btn-custom {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .btn-custom:hover {
+            background-color: #45a049;
+        }
+
+        .alert {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -46,7 +82,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 50px;">
+            <img src="asset\images\logo.png" alt="Logo" style="height: 50px;">
                 "Ler é mergulhar em um mar de conhecimento"
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,10 +105,7 @@
                         <a class="nav-link" href="{{ Auth::user()->is_bibliotecario ? route('bibliotecario-admin') : route('usuario') }}">
                             Olá, {{ Auth::user()->name }}
                         </a>
-
-
                     </li>
-
                     <li class="nav-item">
                         <form action="{{ url('/logout') }}" method="POST" style="display: inline;">
                             @csrf
@@ -86,47 +119,45 @@
 
     <!-- Conteúdo Principal -->
     <div class="container page-content mt-5">
-        <h2>Catálogo de Livros</h2>
-        <!-- Conteúdo Principal -->
-        <div class="container page-content mt-5">
-            <h2>Catálogo de Livros</h2>
+        <h2 class="mb-4">Catálogo de Livros</h2>
 
-            @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-            @endif
-
-            @if(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-            @endif
-
-            @forelse($livros as $livro)
-            <!-- Conteúdo do loop -->
-            @empty
-            <!-- Conteúdo vazio -->
-            @endforelse
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
+        @endif
+
+        @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
 
         @forelse($livros as $livro)
         <div class="book-card">
-            <h5 class="book-title">{{ $livro->titulo }}</h5>
-            <p class="book-author">Autor: {{ $livro->autor }}</p>
-            <p>Gênero: {{ $livro->genero }}</p>
-            <p>Status: {{ $livro->disponibilidade ? 'Disponível' : 'Indisponível' }}</p>
-
-            <!-- Botão de Alugar -->
-            @if($livro->disponibilidade)
-            <form action="{{ route('emprestimo.emprestimo', $livro->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-primary">Alugar</button>
-            </form>
-
-            @else
-            <button type="button" class="btn btn-secondary" disabled>Indisponível</button>
+            <!-- Imagem do livro -->
+            @if($livro->imagem_url)
+            <div class="book-image">
+                <img src="{{ $livro->imagem_url }}" alt="{{ $livro->titulo }}">
+            </div>
             @endif
+
+            <div class="book-details">
+                <h5 class="book-title">{{ $livro->titulo }}</h5>
+                <p class="book-author">Autor: {{ $livro->autor }}</p>
+                <p>Gênero: {{ $livro->genero }}</p>
+                <p>Status: {{ $livro->disponibilidade ? 'Disponível' : 'Indisponível' }}</p>
+
+                <!-- Botão de Alugar -->
+                @if($livro->disponibilidade)
+                <form action="{{ route('emprestimo.emprestimo', $livro->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-custom">Alugar</button>
+                </form>
+                @else
+                <button type="button" class="btn btn-secondary" disabled>Indisponível</button>
+                @endif
+            </div>
         </div>
         @empty
         <p>Não há livros cadastrados.</p>

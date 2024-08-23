@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +9,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .custom-navbar {
-            background-color: #4CAF50; /* Cor personalizada da navbar */
+            background-color: #4CAF50;
+            /* Cor personalizada da navbar */
         }
 
         .navbar {
-            font-family: 'Roboto', sans-serif; /* Fonte personalizada */
+            font-family: 'Roboto', sans-serif;
+            /* Fonte personalizada */
         }
 
         .page-content {
-            font-family: 'Roboto', sans-serif; /* Aplicando a mesma fonte da navbar */
+            font-family: 'Roboto', sans-serif;
+            /* Aplicando a mesma fonte da navbar */
             padding: 20px;
         }
 
         .btn-custom {
-            background-color: #4CAF50; /* Cor personalizada do botão */
+            background-color: #4CAF50;
+            /* Cor personalizada do botão */
             color: #fff;
         }
 
@@ -30,12 +35,13 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 50px;">
+            <img src="asset\images\logo.png" alt="Logo" style="height: 50px;">
                 "Ler é mergulhar em um mar de conhecimento"
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,6 +101,11 @@
                     <option value="0">Indisponível</option>
                 </select>
             </div>
+            <div class="mb-3">
+                <label for="imagem_url" class="form-label">URL da Imagem</label>
+                <input type="text" class="form-control" id="imagem_url" name="imagem_url" placeholder="https://example.com/imagem.jpg" required>
+            </div>
+
             <button type="submit" class="btn btn-custom">Salvar</button>
             <a href="{{ route('livros.index') }}" class="btn btn-secondary">Voltar</a>
         </form>
@@ -102,4 +113,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -12,6 +12,7 @@ class LivroController extends Controller
     {
         $livros = Livro::all();
         return view('livros.index', compact('livros'));
+        
     }
 
     public function create()
@@ -26,6 +27,7 @@ class LivroController extends Controller
             'autor' => 'required|string',
             'genero' => 'required|string',
             'disponibilidade' => 'required|boolean',
+            'imagem_url' => 'nullable|string|max:255'
         ]);
     
         Livro::create([
@@ -33,7 +35,8 @@ class LivroController extends Controller
             'autor' => $request->input('autor'),
             'genero' => $request->input('genero'),
             'disponibilidade' => $request->input('disponibilidade'),
-            'bibliotecario_id' => Auth::id()// Atribuindo o ID do bibliotecário
+            'imagem_url' => $request->input('imagem_url'), // Adicionando imagem_url
+            'bibliotecario_id' => Auth::id() // Atribuindo o ID do bibliotecário
         ]);
     
         return redirect()->route('livros.index');
@@ -52,13 +55,21 @@ class LivroController extends Controller
     public function update(Request $request, Livro $livro)
     {
         $request->validate([
-            'titulo' => 'required',
-            'autor' => 'required',
-            'genero' => 'required',
-            'disponibilidade' => 'required',
+            'titulo' => 'required|string',
+            'autor' => 'required|string',
+            'genero' => 'required|string',
+            'disponibilidade' => 'required|boolean',
+            'imagem_url' => 'nullable|string|max:255' // Adicionando validação para imagem_url
         ]);
 
-        $livro->update($request->all());
+        $livro->update([
+            'titulo' => $request->input('titulo'),
+            'autor' => $request->input('autor'),
+            'genero' => $request->input('genero'),
+            'disponibilidade' => $request->input('disponibilidade'),
+            'imagem_url' => $request->input('imagem_url'), // Atualizando imagem_url
+        ]);
+        
         return redirect()->route('livros.index')->with('success', 'Livro atualizado com sucesso.');
     }
 
@@ -67,4 +78,10 @@ class LivroController extends Controller
         $livro->delete();
         return redirect()->route('livros.index')->with('success', 'Livro excluído com sucesso.');
     }
+    public function welcome()
+    {
+        $destaques = Livro::where('destaque', true)->take(5)->get();
+        return view('welcome', compact('destaques'));
+    }
+    
 }

@@ -40,3 +40,6 @@ Route::post('emprestimos/{livro}', [EmprestimoController::class, 'emprestimo'])-
 
 // Rota para confirmar o empréstimo de um livro
 Route::post('emprestimos/confirmar/{livro}', [EmprestimoController::class, 'confirmar'])->name('emprestimos.confirmar')->middleware('auth');
+
+
+Route::get('/', [LivroController::class, 'welcome'])->name('welcome');

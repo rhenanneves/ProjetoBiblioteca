@@ -15,6 +15,7 @@ class Livro extends Model
         'genero',
         'disponibilidade',
         'bibliotecario_id', // Adiciona a nova coluna
+        'imagem_url',  // Adicione este campo
     ];
 
     // Defina a relação se necessário

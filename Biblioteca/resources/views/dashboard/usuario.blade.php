@@ -14,6 +14,26 @@
         .navbar {
             font-family: 'Roboto', sans-serif; /* Fonte personalizada */
         }
+
+        .book-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .book-author {
+            font-size: 1rem;
+            color: #777;
+        }
     </style>
 </head>
 <body>
@@ -21,7 +41,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 50px;">
+            <img src="asset\images\logo.png" alt="Logo" style="height: 50px;">
                 "Ler é mergulhar em um mar de conhecimento"
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,15 +87,17 @@
             <div class="card-header">
                 Meus Livros Alugados
             </div>
-           <h5>Livros Alugados:</h5>
-                    @foreach($loans->where('user_id', $user->id) as $loan)
-                        <div class="book-card">
-                            <h5 class="book-title">{{ $loan->livro->titulo }}</h5>
-                            <p class="book-author">Autor: {{ $loan->livro->autor }}</p>
-                            <p>Data do Empréstimo: {{ $loan->created_at->format('d/m/Y') }}</p>
-                            <p>Data da Devolução: {{ $loan->data_devolucao ? $loan->data_devolucao->format('d/m/Y') : 'Não devolvido' }}</p>
-                        </div>
-                    @endforeach
+           <div class="card-body">
+                <h5>Livros Alugados:</h5>
+                @foreach($loans->where('user_id', $user->id) as $loan)
+                    <div class="book-card">
+                        <h5 class="book-title">{{ $loan->livro->titulo }}</h5>
+                        <p class="book-author">Autor: {{ $loan->livro->autor }}</p>
+                        <p>Data do Empréstimo: {{ $loan->created_at->format('d/m/Y') }}</p>
+                        <p>Data da Devolução: {{ $loan->data_devolucao ? $loan->data_devolucao->format('d/m/Y') : 'Não devolvido' }}</p>
+                    </div>
+                @endforeach
+            </div>
         </div>
 
         <!-- Container Editar Perfil -->
